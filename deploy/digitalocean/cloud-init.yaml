@@ -1,0 +1,48 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+packages:
+  - ca-certificates
+  - curl
+  - docker.io
+  - fail2ban
+  - git
+  - unattended-upgrades
+  - ufw
+
+write_files:
+  - path: /etc/docker/daemon.json
+    permissions: "0644"
+    content: |
+      {
+        "live-restore": true,
+        "log-driver": "local",
+        "log-opts": {
+          "max-size": "10m",
+          "max-file": "3"
+        }
+      }
+  - path: /etc/carolina-slicer-worker.env
+    owner: root:root
+    permissions: "0600"
+    content: |
+      QUOTE_ENGINE_BASE_URL=https://quoteengine.carolina3dprintstudio.com
+      SLICER_WORKER_ID=digitalocean-worker-1
+      SLICER_WORKER_POLL_MS=10000
+      SLICER_WORKER_TOKEN=SET_AFTER_PROVISIONING
+      SLICE_JOB_SIGNING_SECRET=SET_AFTER_PROVISIONING
+
+runcmd:
+  - systemctl enable --now docker
+  - systemctl enable --now fail2ban
+  - systemctl enable --now unattended-upgrades
+  - ufw default deny incoming
+  - ufw default allow outgoing
+  - ufw allow OpenSSH
+  - ufw --force enable
+  - git clone --depth 1 https://github.com/aglassman-dev/carolina-slicer-worker.git /opt/carolina-slicer-worker
+  - docker build --platform linux/amd64 --tag carolina-slicer-worker:stable /opt/carolina-slicer-worker
+  - cp /opt/carolina-slicer-worker/deploy/digitalocean/carolina-slicer-worker.service /etc/systemd/system/carolina-slicer-worker.service
+  - systemctl daemon-reload
+
+final_message: "Carolina slicer worker image is built. Install the two production secrets, then enable the service."

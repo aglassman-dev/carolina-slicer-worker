@@ -67,3 +67,19 @@ Outside local development, the platform URL must use HTTPS. Never commit secrets
 Run the worker as an unprivileged user in an isolated VM or container. Restrict outbound traffic to the quote-engine origin, use a private ephemeral work volume, and enforce CPU, memory, process, disk, and wall-clock limits. Production operators should monitor queue age and sanitized failure categories without logging client content.
 
 Security reports should follow [SECURITY.md](./SECURITY.md).
+
+## Isolated DigitalOcean worker
+
+The included container pins Bambu Studio `v02.07.01.62` by SHA-256 and runs the worker as an unprivileged user. The DigitalOcean deployment files configure a dedicated egress-only worker VM with no application port, a read-only container filesystem, memory-backed work directories, dropped Linux capabilities, bounded CPU/RAM/processes, log rotation, a host firewall, automatic security updates, and restart-on-failure.
+
+Use a 64-bit Ubuntu 22.04 Basic Droplet with at least 2 vCPUs and 4 GB RAM. Supply `deploy/digitalocean/cloud-init.yaml` as user data when creating it. The bootstrap intentionally leaves the worker service stopped until two independent production secrets are installed in `/etc/carolina-slicer-worker.env`.
+
+After provisioning:
+
+```bash
+sudo chmod 600 /etc/carolina-slicer-worker.env
+sudo systemctl enable --now carolina-slicer-worker
+sudo systemctl status carolina-slicer-worker
+```
+
+Do not place either secret in cloud-init, source control, shell history, screenshots, or support tickets. Keep inbound firewall access limited to SSH from trusted administrator addresses.

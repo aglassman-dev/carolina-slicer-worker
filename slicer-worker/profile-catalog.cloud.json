@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "profileRoot": "__PROFILE_ROOT__",
+  "sets": [
+    {
+      "id": "small-04-pla",
+      "label": "Bambu Lab A1 mini · 0.4 mm · PLA",
+      "machine": "machine/Bambu Lab A1 mini 0.4 nozzle.json",
+      "processes": {
+        "draft": "process/0.24mm Draft @BBL A1M.json",
+        "standard": "process/0.20mm Standard @BBL A1M.json",
+        "fine": "process/0.12mm Fine @BBL A1M.json"
+      },
+      "filaments": [
+        "filament/Bambu PLA Basic @BBL A1M.json"
+      ]
+    },
+    {
+      "id": "medium-04-pla",
+      "label": "Bambu Lab P2S · 0.4 mm · PLA",
+      "machine": "machine/Bambu Lab P2S 0.4 nozzle.json",
+      "processes": {
+        "draft": "process/0.24mm Standard @BBL P2S.json",
+        "standard": "process/0.20mm Standard @BBL P2S.json",
+        "fine": "process/0.12mm High Quality @BBL P2S.json"
+      },
+      "filaments": [
+        "filament/Bambu PLA Basic @BBL P2S.json"
+      ]
+    },
+    {
+      "id": "large-04-pla",
+      "label": "Bambu Lab H2S · 0.4 mm · PLA",
+      "machine": "machine/Bambu Lab H2S 0.4 nozzle.json",
+      "processes": {
+        "draft": "process/0.24mm Standard @BBL H2S.json",
+        "standard": "process/0.20mm Standard @BBL H2S.json",
+        "fine": "process/0.12mm High Quality @BBL H2S.json"
+      },
+      "filaments": [
+        "filament/Bambu PLA Basic @BBL H2S.json"
+      ]
+    }
+  ]
+}

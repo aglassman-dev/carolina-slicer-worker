@@ -1,0 +1,29 @@
+[Unit]
+Description=Carolina isolated slicer worker
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=10
+TimeoutStopSec=300
+EnvironmentFile=/etc/carolina-slicer-worker.env
+ExecStartPre=-/usr/bin/docker rm -f carolina-slicer-worker
+ExecStart=/usr/bin/docker run --name carolina-slicer-worker \
+  --read-only \
+  --tmpfs /home/slicer:rw,nosuid,nodev,noexec,size=256m,uid=10001,gid=10001 \
+  --tmpfs /tmp:rw,nosuid,nodev,size=512m,uid=10001,gid=10001 \
+  --tmpfs /work:rw,nosuid,nodev,noexec,size=3g,uid=10001,gid=10001 \
+  --cap-drop=ALL \
+  --security-opt=no-new-privileges:true \
+  --pids-limit=256 \
+  --memory=3500m \
+  --cpus=2 \
+  --env-file /etc/carolina-slicer-worker.env \
+  carolina-slicer-worker:stable
+ExecStop=/usr/bin/docker stop --time 290 carolina-slicer-worker
+
+[Install]
+WantedBy=multi-user.target
