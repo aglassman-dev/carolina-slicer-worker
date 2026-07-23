@@ -44,6 +44,6 @@ jobs:
       - run: docker run --rm --entrypoint sh carolina-slicer-worker:ci -lc '! LD_LIBRARY_PATH=/opt/bambu-studio/bin ldd /opt/bambu-studio/bin/bambu-studio | grep -F "not found"'
       - run: |
           status=0
-          timeout 30s docker run --rm --entrypoint xvfb-run carolina-slicer-worker:ci -a /opt/bambu-studio/AppRun --help > bambu-help.txt 2>&1 || status=$?
+          docker run --rm --entrypoint timeout carolina-slicer-worker:ci 30s xvfb-run -a /opt/bambu-studio/AppRun --help > bambu-help.txt 2>&1 || status=$?
           test "$status" -eq 0 || test "$status" -eq 124
           grep -F "BambuStudio-" bambu-help.txt
