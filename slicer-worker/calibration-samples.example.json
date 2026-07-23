@@ -1,0 +1,38 @@
+{
+  "instructions": "Replace every example row with measurements from completed production prints. Do not apply generated factors until they have been reviewed.",
+  "samples": [
+    {
+      "profileSetId": "medium-04-pla",
+      "resolution": "standard",
+      "material": "PLA",
+      "predictedSeconds": 3600,
+      "actualSeconds": 3780,
+      "predictedGrams": 50,
+      "actualGrams": 50.8,
+      "completedAt": "2026-07-01T16:00:00.000Z",
+      "notes": "Example only"
+    },
+    {
+      "profileSetId": "medium-04-pla",
+      "resolution": "standard",
+      "material": "PLA",
+      "predictedSeconds": 7200,
+      "actualSeconds": 7560,
+      "predictedGrams": 100,
+      "actualGrams": 101.2,
+      "completedAt": "2026-07-02T16:00:00.000Z",
+      "notes": "Example only"
+    },
+    {
+      "profileSetId": "medium-04-pla",
+      "resolution": "standard",
+      "material": "PLA",
+      "predictedSeconds": 10800,
+      "actualSeconds": 11160,
+      "predictedGrams": 150,
+      "actualGrams": 151.5,
+      "completedAt": "2026-07-03T16:00:00.000Z",
+      "notes": "Example only"
+    }
+  ]
+}

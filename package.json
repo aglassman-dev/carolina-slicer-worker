@@ -1,0 +1,41 @@
+{
+  "name": "@carolina-3d-print-studio/slicer-worker",
+  "version": "0.1.0",
+  "description": "Isolated AGPL slicer worker for signed, encrypted 3D-production estimate jobs.",
+  "license": "AGPL-3.0-only",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "worker": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/slicer-worker-local.mts",
+    "worker:remote": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/slicer-worker-remote.mts",
+    "sign-job": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/sign-slicer-job.mts",
+    "poc": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/slicer-poc.mts",
+    "calibrate": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/slicer-calibrate.mts"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "adm-zip": "0.5.16",
+    "occt-import-js": "0.0.23",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "0.5.7",
+    "@types/node": "24.10.1",
+    "typescript": "5.9.3",
+    "vitest": "4.0.18"
+  },
+  "files": [
+    "lib",
+    "scripts",
+    "slicer-worker",
+    "types",
+    "LICENSE",
+    "README.md",
+    "SECURITY.md",
+    "THIRD_PARTY_NOTICES.md"
+  ]
+}
