@@ -41,3 +41,4 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - run: docker run --rm --entrypoint node carolina-slicer-worker:ci --version
+      - run: docker run --rm --entrypoint xvfb-run carolina-slicer-worker:ci -a /opt/bambu-studio/AppRun --help | grep -F "BambuStudio-"

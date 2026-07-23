@@ -21,9 +21,12 @@ RUN apt-get update \
     libfontconfig1 \
     libgl1 \
     libglu1-mesa \
+    libgstreamer1.0-0 \
+    libgstreamer-plugins-base1.0-0 \
     libgtk-3-0 \
     libnss3 \
     libopengl0 \
+    libwebkit2gtk-4.1-0 \
     libx11-6 \
     libx11-xcb1 \
     libxcb1 \
